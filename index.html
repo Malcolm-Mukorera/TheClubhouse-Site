@@ -79,9 +79,7 @@
 
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
         <span class="sr-only">Toggle navigation</span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+        <span class="nav-toggle-icon" aria-hidden="true">Menu</span>
       </button>
 
       <div class="nav-menu" id="primary-navigation" data-nav-menu>
@@ -208,21 +206,21 @@
           <h2 id="services-title">A complete event and promotions ecosystem under one roof.</h2>
         </div>
         <div class="service-grid" aria-label="The Clubhouse services">
-          <button type="button" data-service="Hubbly Services">Hubbly Services</button>
-          <button type="button" data-service="Hostess Services">Hostess Services</button>
-          <button type="button" data-service="Promoters / Brand Ambassadors">Promoters / Brand Ambassadors</button>
-          <button type="button" data-service="Sound Systems">Sound Systems</button>
-          <button type="button" data-service="Event Planning & Management">Event Planning & Management</button>
-          <button type="button" data-service="Content Creators">Content Creators</button>
-          <button type="button" data-service="Influencer Marketing">Influencer Marketing</button>
-          <button type="button" data-service="Bar Services">Bar Services</button>
-          <button type="button" data-service="Furniture Hire">Furniture Hire</button>
-          <button type="button" data-service="Artist Bookings">Artist Bookings</button>
-          <button type="button" data-service="Brand Activations">Brand Activations</button>
-          <button type="button" data-service="Flyer Distribution">Flyer Distribution</button>
-          <button type="button" data-service="Decor & Theming">Decor & Theming</button>
-          <button type="button" data-service="Photography & Videography">Photography & Videography</button>
-          <button type="button" data-service="Custom Event Support">Custom Event Support</button>
+          <button type="button" aria-pressed="false" data-service="Hubbly Services">Hubbly Services</button>
+          <button type="button" aria-pressed="false" data-service="Hostess Services">Hostess Services</button>
+          <button type="button" aria-pressed="false" data-service="Promoters / Brand Ambassadors">Promoters / Brand Ambassadors</button>
+          <button type="button" aria-pressed="false" data-service="Sound Systems">Sound Systems</button>
+          <button type="button" aria-pressed="false" data-service="Event Planning & Management">Event Planning & Management</button>
+          <button type="button" aria-pressed="false" data-service="Content Creators">Content Creators</button>
+          <button type="button" aria-pressed="false" data-service="Influencer Marketing">Influencer Marketing</button>
+          <button type="button" aria-pressed="false" data-service="Bar Services">Bar Services</button>
+          <button type="button" aria-pressed="false" data-service="Furniture Hire">Furniture Hire</button>
+          <button type="button" aria-pressed="false" data-service="Artist Bookings">Artist Bookings</button>
+          <button type="button" aria-pressed="false" data-service="Brand Activations">Brand Activations</button>
+          <button type="button" aria-pressed="false" data-service="Flyer Distribution">Flyer Distribution</button>
+          <button type="button" aria-pressed="false" data-service="Decor & Theming">Decor & Theming</button>
+          <button type="button" aria-pressed="false" data-service="Photography & Videography">Photography & Videography</button>
+          <button type="button" aria-pressed="false" data-service="Custom Event Support">Custom Event Support</button>
         </div>
         <div class="service-selection" data-service-selection aria-live="polite">
           Select services to build a quick enquiry.
@@ -251,8 +249,9 @@
             that people remember.
           </p>
           <p>
-            This starter biography is designed to be replaced with Smillo’s final
-            profile, achievements, and portrait when those assets are ready.
+            His work keeps The Clubhouse close to the culture while staying focused
+            on reliable execution, client confidence, and experiences that feel
+            organised from the first brief to the final guest.
           </p>
           <div class="ceo-signature">
             <strong>Smillo</strong>
@@ -273,9 +272,9 @@
           </p>
         </div>
         <div class="feed-toolbar" aria-label="Social feed filters">
-          <button class="is-active" type="button" data-feed-filter="all">All</button>
-          <button type="button" data-feed-filter="instagram">Instagram</button>
-          <button type="button" data-feed-filter="tiktok">TikTok</button>
+          <button class="is-active" type="button" aria-pressed="true" data-feed-filter="all">All</button>
+          <button type="button" aria-pressed="false" data-feed-filter="instagram">Instagram</button>
+          <button type="button" aria-pressed="false" data-feed-filter="tiktok">TikTok</button>
         </div>
         <div class="feed-status" data-feed-status aria-live="polite">
           Preparing Smillo’s feed view.
@@ -313,9 +312,9 @@
         </div>
         <div class="contact-panel" aria-label="Contact details">
           <div class="brief-options" aria-label="Choose event type">
-            <button class="is-active" type="button" data-brief="Corporate event">Corporate</button>
-            <button type="button" data-brief="Brand activation">Activation</button>
-            <button type="button" data-brief="Nightlife promotion">Nightlife</button>
+            <button class="is-active" type="button" aria-pressed="true" data-brief="Corporate event">Corporate</button>
+            <button type="button" aria-pressed="false" data-brief="Brand activation">Activation</button>
+            <button type="button" aria-pressed="false" data-brief="Nightlife promotion">Nightlife</button>
           </div>
           <p class="brief-preview" data-brief-preview>
             I would like to discuss a corporate event with The Clubhouse.
@@ -345,7 +344,7 @@
       aria-controls="whatsapp-panel"
       data-whatsapp-toggle
     >
-      <svg aria-hidden="true" viewBox="0 0 32 32" focusable="false">
+      <svg aria-hidden="true" viewBox="0 0 32 32">
         <path d="M16.04 4C9.42 4 4.04 9.38 4.04 16c0 2.11.55 4.17 1.6 5.98L4 28l6.17-1.62A11.95 11.95 0 0 0 16.04 28c6.62 0 12-5.38 12-12s-5.38-12-12-12Zm0 21.86c-1.8 0-3.56-.49-5.09-1.42l-.36-.22-3.66.96.98-3.57-.24-.37A9.82 9.82 0 0 1 6.18 16c0-5.43 4.42-9.85 9.86-9.85 5.43 0 9.85 4.42 9.85 9.85s-4.42 9.86-9.85 9.86Zm5.4-7.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.29-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.29-.02-.45.13-.6.13-.13.3-.35.44-.52.15-.17.2-.3.3-.49.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.91-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1.01-1.04 2.47s1.06 2.88 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.62.71.23 1.35.19 1.86.12.57-.08 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.56-.35Z" />
       </svg>
     </button>

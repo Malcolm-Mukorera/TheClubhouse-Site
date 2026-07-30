@@ -8,6 +8,7 @@ const serviceSelection = document.querySelector("[data-service-selection]");
 const briefButtons = document.querySelectorAll("[data-brief]");
 const briefPreview = document.querySelector("[data-brief-preview]");
 const briefEmail = document.querySelector("[data-brief-email]");
+const contactEmail = document.querySelector("[data-email-link]");
 const whatsappLink = document.querySelector("[data-whatsapp-link]");
 const whatsappWidget = document.querySelector("[data-whatsapp-widget]");
 const whatsappToggle = document.querySelector("[data-whatsapp-toggle]");
@@ -45,6 +46,10 @@ const updateContactLinks = () => {
 
   if (briefEmail instanceof HTMLAnchorElement) {
     briefEmail.href = `mailto:info@theclubhouse.co.za?subject=${subject}&body=${body}`;
+  }
+
+  if (contactEmail instanceof HTMLAnchorElement) {
+    contactEmail.href = `mailto:info@theclubhouse.co.za?subject=${subject}&body=${body}`;
   }
 
   if (whatsappLink instanceof HTMLAnchorElement) {
@@ -92,6 +97,14 @@ const renderFeed = () => {
     : items.filter((item) => item.platform === activeFeedFilter);
 
   feedGrid.replaceChildren();
+
+  if (!visibleItems.length) {
+    const empty = document.createElement("article");
+    empty.className = "feed-empty";
+    empty.textContent = `No ${formatPlatform(activeFeedFilter)} items are available yet.`;
+    feedGrid.append(empty);
+    return;
+  }
 
   visibleItems.forEach((item) => {
     const card = document.createElement("article");
@@ -315,9 +328,11 @@ if (serviceButtons.length && serviceSelection) {
       if (selectedServices.has(service)) {
         selectedServices.delete(service);
         button.classList.remove("is-selected");
+        button.setAttribute("aria-pressed", "false");
       } else {
         selectedServices.add(service);
         button.classList.add("is-selected");
+        button.setAttribute("aria-pressed", "true");
       }
 
       const services = Array.from(selectedServices);
@@ -339,8 +354,12 @@ if (briefButtons.length) {
       }
 
       selectedBrief = brief;
-      briefButtons.forEach((item) => item.classList.remove("is-active"));
+      briefButtons.forEach((item) => {
+        item.classList.remove("is-active");
+        item.setAttribute("aria-pressed", "false");
+      });
       button.classList.add("is-active");
+      button.setAttribute("aria-pressed", "true");
       updateContactLinks();
     });
   });
@@ -350,8 +369,12 @@ if (feedFilters.length) {
   feedFilters.forEach((button) => {
     button.addEventListener("click", () => {
       activeFeedFilter = button.getAttribute("data-feed-filter") || "all";
-      feedFilters.forEach((item) => item.classList.remove("is-active"));
+      feedFilters.forEach((item) => {
+        item.classList.remove("is-active");
+        item.setAttribute("aria-pressed", "false");
+      });
       button.classList.add("is-active");
+      button.setAttribute("aria-pressed", "true");
       renderFeed();
     });
   });

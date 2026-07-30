@@ -1,6 +1,6 @@
 # The Clubhouse Website
 
-Static starter website for The Clubhouse, a premium events and promotions agency led by Smillo.
+Static website for The Clubhouse, a premium events and promotions agency led by Smillo.
 
 ## Stack
 
@@ -14,13 +14,13 @@ Static starter website for The Clubhouse, a premium events and promotions agency
 From this folder:
 
 ```bash
-python3 -m http.server 8080
+python3 -m http.server 8090
 ```
 
 Then open:
 
 ```text
-http://127.0.0.1:8080
+http://127.0.0.1:8090
 ```
 
 ## GitHub Pages
@@ -45,9 +45,11 @@ This project can be imported into Vercel as a static site.
 
 Security headers are configured in `vercel.json`.
 
-## Content To Replace Later
+## Content Notes
 
-- CEO portrait: `assets/images/ceo-placeholder.png`
-- Hero image if final event photography becomes available: `assets/images/hero-event.png`
-- Phone number: `+27 000 000 0000`
-- CEO biography copy in `index.html`
+- CEO portrait: `assets/images/smillo-ceo.jpg`
+- Hero image: `assets/images/hero-event.png`
+- Smillo WhatsApp: `+27 61 402 6217`
+- Social feed data: `assets/data/social-feed.json`
+
+Instagram and TikTok can be connected later through their official APIs. WhatsApp Status cannot be embedded publicly through the official WhatsApp platform.
