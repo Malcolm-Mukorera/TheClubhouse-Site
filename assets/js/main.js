@@ -6,7 +6,12 @@ const briefButtons = document.querySelectorAll("[data-brief]");
 const briefPreview = document.querySelector("[data-brief-preview]");
 const briefEmail = document.querySelector("[data-brief-email]");
 const whatsappLink = document.querySelector("[data-whatsapp-link]");
+const feedGrid = document.querySelector("[data-social-feed]");
+const feedStatus = document.querySelector("[data-feed-status]");
+const feedFilters = document.querySelectorAll("[data-feed-filter]");
 const whatsappNumber = "27614026217";
+let feedItems = [];
+let activeFeedFilter = "all";
 
 const selectedServices = new Set();
 let selectedBrief = "Corporate event";
@@ -36,6 +41,130 @@ const updateContactLinks = () => {
   if (whatsappLink instanceof HTMLAnchorElement) {
     whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${body}`;
   }
+};
+
+const fallbackFeedItems = [
+  {
+    platform: "instagram",
+    type: "Posts & Reels",
+    title: "Instagram feed ready",
+    caption: "Connect Smillo's public Instagram Creator or Business account to show new posts and reels here automatically.",
+    permalink: "#contact"
+  },
+  {
+    platform: "tiktok",
+    type: "Videos",
+    title: "TikTok feed ready",
+    caption: "Connect Smillo's TikTok account through the Display API to show his latest public videos here.",
+    permalink: "#contact"
+  }
+];
+
+const formatPlatform = (platform) => {
+  if (platform === "instagram") {
+    return "Instagram";
+  }
+
+  if (platform === "tiktok") {
+    return "TikTok";
+  }
+
+  return "Social";
+};
+
+const renderFeed = () => {
+  if (!feedGrid) {
+    return;
+  }
+
+  const items = feedItems.length ? feedItems : fallbackFeedItems;
+  const visibleItems = activeFeedFilter === "all"
+    ? items
+    : items.filter((item) => item.platform === activeFeedFilter);
+
+  feedGrid.replaceChildren();
+
+  visibleItems.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "feed-card";
+    card.dataset.platform = item.platform || "social";
+
+    const media = document.createElement("a");
+    media.className = "feed-media";
+    media.href = item.permalink || "#contact";
+    if (item.permalink && item.permalink !== "#contact") {
+      media.target = "_blank";
+      media.rel = "noopener noreferrer";
+    }
+
+    if (item.thumbnail) {
+      const image = document.createElement("img");
+      image.src = item.thumbnail;
+      image.alt = item.title || `${formatPlatform(item.platform)} post`;
+      image.loading = "lazy";
+      media.append(image);
+    } else {
+      const label = document.createElement("span");
+      label.textContent = formatPlatform(item.platform);
+      media.append(label);
+    }
+
+    const body = document.createElement("div");
+    body.className = "feed-card-body";
+
+    const meta = document.createElement("span");
+    meta.className = "feed-meta";
+    meta.textContent = `${formatPlatform(item.platform)} / ${item.type || "Update"}`;
+
+    const title = document.createElement("h3");
+    title.textContent = item.title || "Latest update";
+
+    const caption = document.createElement("p");
+    caption.textContent = item.caption || "Open this post on the original platform.";
+
+    const link = document.createElement("a");
+    link.href = item.permalink || "#contact";
+    link.textContent = item.permalink === "#contact" ? "Connect feed" : "View post";
+    if (item.permalink && item.permalink !== "#contact") {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    }
+
+    body.append(meta, title, caption, link);
+    card.append(media, body);
+    feedGrid.append(card);
+  });
+};
+
+const loadSocialFeed = async () => {
+  if (!feedGrid) {
+    return;
+  }
+
+  try {
+    const response = await fetch("assets/data/social-feed.json", { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error("Feed unavailable");
+    }
+
+    const feed = await response.json();
+    feedItems = Array.isArray(feed.items) ? feed.items : [];
+
+    if (feedStatus) {
+      feedStatus.textContent = feed.connected
+        ? `Live feed connected${feed.updatedAt ? ` / Updated ${feed.updatedAt}` : ""}.`
+        : "Feeds are ready to connect. Instagram and TikTok authorization is still needed.";
+    }
+  } catch (error) {
+    feedItems = [];
+
+    if (feedStatus) {
+      feedStatus.textContent = "Feeds are ready to connect. Add Instagram and TikTok API access to go live.";
+    }
+  }
+
+  renderFeed();
 };
 
 if (toggle && menu) {
@@ -98,4 +227,16 @@ if (briefButtons.length) {
   });
 }
 
+if (feedFilters.length) {
+  feedFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeFeedFilter = button.getAttribute("data-feed-filter") || "all";
+      feedFilters.forEach((item) => item.classList.remove("is-active"));
+      button.classList.add("is-active");
+      renderFeed();
+    });
+  });
+}
+
 updateContactLinks();
+loadSocialFeed();
