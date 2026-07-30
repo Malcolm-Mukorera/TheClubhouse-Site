@@ -6,6 +6,7 @@ const briefButtons = document.querySelectorAll("[data-brief]");
 const briefPreview = document.querySelector("[data-brief-preview]");
 const briefEmail = document.querySelector("[data-brief-email]");
 const whatsappLink = document.querySelector("[data-whatsapp-link]");
+const whatsappNumber = "27614026217";
 
 const selectedServices = new Set();
 let selectedBrief = "Corporate event";
@@ -33,7 +34,7 @@ const updateContactLinks = () => {
   }
 
   if (whatsappLink instanceof HTMLAnchorElement) {
-    whatsappLink.href = `https://wa.me/270000000000?text=${body}`;
+    whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${body}`;
   }
 };
 

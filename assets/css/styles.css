@@ -423,6 +423,7 @@ p {
 .reason-grid p,
 .service-grid button,
 .service-selection,
+.social-card p,
 .contact p,
 .ceo-copy p {
   color: var(--text-muted);
@@ -514,6 +515,59 @@ p {
 .ceo-signature span {
   color: var(--text-muted);
   font-weight: 800;
+}
+
+.social-feed {
+  background: var(--paper-muted);
+}
+
+.social-feed .section-heading p:last-child {
+  max-width: 700px;
+  margin-top: 16px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.social-card {
+  display: grid;
+  gap: 12px;
+  min-height: 250px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.social-card span {
+  width: max-content;
+  padding-bottom: 7px;
+  border-bottom: 3px solid var(--bg);
+  font-size: 0.76rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.social-card p {
+  align-self: start;
+}
+
+.social-card a {
+  align-self: end;
+  color: var(--text);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.social-card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
 }
 
 .promise {
@@ -688,6 +742,7 @@ p {
   }
 
   .reason-grid,
+  .social-grid,
   .service-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -719,6 +774,7 @@ p {
 
   .hero-proof,
   .reason-grid,
+  .social-grid,
   .service-grid {
     grid-template-columns: 1fr;
   }
