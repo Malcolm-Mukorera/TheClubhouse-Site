@@ -40,6 +40,21 @@ body.nav-open {
   overflow: hidden;
 }
 
+body.effects-ready .section,
+body.effects-ready .hero-content,
+body.effects-ready .hero-proof {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+body.effects-ready .section.is-visible,
+body.effects-ready .hero-content.is-visible,
+body.effects-ready .hero-proof.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -97,6 +112,13 @@ button:focus-visible {
   background: rgba(0, 0, 0, 0.9);
   color: var(--ink);
   backdrop-filter: blur(18px);
+  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.site-header.is-scrolled {
+  border-bottom-color: rgba(255, 255, 255, 0.28);
+  background: rgba(0, 0, 0, 0.96);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
 }
 
 .nav {
@@ -155,9 +177,11 @@ button:focus-visible {
   font-size: 0.94rem;
   font-weight: 700;
   text-decoration: none;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover,
+.nav-menu a.is-active {
   color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 6px;
@@ -205,6 +229,8 @@ button:focus-visible {
   object-fit: cover;
   object-position: center;
   filter: grayscale(1) contrast(1.05);
+  transform: scale(1.02) translate3d(var(--hero-shift-x, 0), var(--hero-shift-y, 0), 0);
+  transition: transform 800ms ease;
 }
 
 .hero-overlay {
@@ -335,6 +361,12 @@ p {
   font-weight: 900;
   text-align: center;
   text-transform: uppercase;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.hero-proof span:hover {
+  background: var(--ink);
+  color: var(--bg);
 }
 
 .hero-proof span:last-child {
@@ -387,6 +419,16 @@ p {
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.04);
   padding: 22px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.feature-list article:hover,
+.reason-grid article:hover,
+.feed-card:hover,
+.contact-panel:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 0, 0, 0.34);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, 0.18);
 }
 
 .feature-list span {
@@ -575,6 +617,7 @@ p {
   background: var(--paper);
   overflow: hidden;
   box-shadow: var(--shadow);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .feed-media {
@@ -591,6 +634,12 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 320ms ease, filter 320ms ease;
+}
+
+.feed-card:hover .feed-media img {
+  filter: grayscale(0);
+  transform: scale(1.04);
 }
 
 .feed-media span {
@@ -681,6 +730,7 @@ p {
   border-radius: var(--radius);
   background: var(--paper);
   box-shadow: var(--shadow);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .brief-options {
@@ -736,11 +786,14 @@ p {
   color: var(--ink);
 }
 
-.whatsapp-float {
+.whatsapp-widget {
   position: fixed;
   z-index: 60;
   right: 18px;
   bottom: 18px;
+}
+
+.whatsapp-float {
   display: grid;
   place-items: center;
   width: 58px;
@@ -750,8 +803,9 @@ p {
   background: #25d366;
   color: var(--ink);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
-  text-decoration: none;
+  cursor: pointer;
   transition: transform 160ms ease, background 160ms ease, color 160ms ease;
+  animation: whatsapp-pulse 1.9s ease-out infinite;
 }
 
 .whatsapp-float svg {
@@ -764,6 +818,86 @@ p {
   transform: translateY(-3px);
   background: #1ebe5d;
   color: var(--ink);
+  animation-play-state: paused;
+}
+
+.whatsapp-widget.is-open .whatsapp-float {
+  animation-play-state: paused;
+  transform: rotate(8deg);
+}
+
+.whatsapp-panel {
+  position: absolute;
+  right: 0;
+  bottom: 74px;
+  display: grid;
+  gap: 10px;
+  width: min(280px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--text);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.96);
+  transform-origin: bottom right;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.whatsapp-widget.is-open .whatsapp-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.whatsapp-panel strong {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.whatsapp-panel span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.whatsapp-panel a,
+.whatsapp-panel button {
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--text);
+  font: inherit;
+  font-weight: 900;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.whatsapp-panel a:hover,
+.whatsapp-panel button:hover {
+  border-color: var(--bg);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.54), 0 14px 32px rgba(0, 0, 0, 0.28);
+  }
+
+  72% {
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0), 0 14px 32px rgba(0, 0, 0, 0.28);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0), 0 14px 32px rgba(0, 0, 0, 0.28);
+  }
 }
 
 .footer-inner {
@@ -870,7 +1004,7 @@ p {
     grid-template-columns: 1fr;
   }
 
-  .whatsapp-float {
+  .whatsapp-widget {
     right: 12px;
     bottom: 12px;
   }
@@ -898,5 +1032,12 @@ p {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  body.effects-ready .section,
+  body.effects-ready .hero-content,
+  body.effects-ready .hero-proof {
+    opacity: 1;
+    transform: none;
   }
 }

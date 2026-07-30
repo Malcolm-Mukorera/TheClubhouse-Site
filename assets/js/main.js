@@ -1,15 +1,24 @@
 const toggle = document.querySelector(".nav-toggle");
 const menu = document.querySelector("[data-nav-menu]");
+const header = document.querySelector("[data-header]");
+const navLinks = document.querySelectorAll(".nav-menu a");
+const hero = document.querySelector(".hero");
 const serviceButtons = document.querySelectorAll("[data-service]");
 const serviceSelection = document.querySelector("[data-service-selection]");
 const briefButtons = document.querySelectorAll("[data-brief]");
 const briefPreview = document.querySelector("[data-brief-preview]");
 const briefEmail = document.querySelector("[data-brief-email]");
 const whatsappLink = document.querySelector("[data-whatsapp-link]");
+const whatsappWidget = document.querySelector("[data-whatsapp-widget]");
+const whatsappToggle = document.querySelector("[data-whatsapp-toggle]");
+const whatsappPanel = document.querySelector("[data-whatsapp-panel]");
+const copyWhatsappButton = document.querySelector("[data-copy-whatsapp]");
+const copyStatus = document.querySelector("[data-copy-status]");
 const feedGrid = document.querySelector("[data-social-feed]");
 const feedStatus = document.querySelector("[data-feed-status]");
 const feedFilters = document.querySelectorAll("[data-feed-filter]");
 const whatsappNumber = "27614026217";
+const whatsappDisplayNumber = "+27 61 402 6217";
 let feedItems = [];
 let activeFeedFilter = "all";
 
@@ -167,6 +176,81 @@ const loadSocialFeed = async () => {
   renderFeed();
 };
 
+const setWhatsappPanel = (isOpen) => {
+  if (!whatsappWidget || !whatsappToggle || !whatsappPanel) {
+    return;
+  }
+
+  whatsappWidget.classList.toggle("is-open", isOpen);
+  whatsappToggle.setAttribute("aria-expanded", String(isOpen));
+  whatsappPanel.setAttribute("aria-hidden", String(!isOpen));
+};
+
+const updateScrollState = () => {
+  if (header) {
+    header.classList.toggle("is-scrolled", window.scrollY > 12);
+  }
+};
+
+const updateActiveNav = () => {
+  if (!navLinks.length) {
+    return;
+  }
+
+  const sections = Array.from(navLinks)
+    .map((link) => document.querySelector(link.getAttribute("href") || ""))
+    .filter(Boolean);
+
+  const passedSections = sections.filter((section) => section.getBoundingClientRect().top <= 130);
+  const current = passedSections[passedSections.length - 1];
+
+  navLinks.forEach((link) => {
+    link.classList.toggle("is-active", Boolean(current) && link.getAttribute("href") === `#${current.id}`);
+  });
+};
+
+const setupRevealEffects = () => {
+  const animatedItems = document.querySelectorAll(".section, .hero-content, .hero-proof");
+
+  if (!animatedItems.length || !("IntersectionObserver" in window)) {
+    animatedItems.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  document.body.classList.add("effects-ready");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.16 });
+
+  animatedItems.forEach((item) => observer.observe(item));
+};
+
+const setupHeroMotion = () => {
+  if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  hero.addEventListener("pointermove", (event) => {
+    const bounds = hero.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 12;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 10;
+
+    hero.style.setProperty("--hero-shift-x", `${x}px`);
+    hero.style.setProperty("--hero-shift-y", `${y}px`);
+  });
+
+  hero.addEventListener("pointerleave", () => {
+    hero.style.setProperty("--hero-shift-x", "0");
+    hero.style.setProperty("--hero-shift-y", "0");
+  });
+};
+
 if (toggle && menu) {
   toggle.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
@@ -183,6 +267,41 @@ if (toggle && menu) {
     }
   });
 }
+
+if (whatsappToggle) {
+  whatsappToggle.addEventListener("click", () => {
+    const isOpen = whatsappToggle.getAttribute("aria-expanded") === "true";
+    setWhatsappPanel(!isOpen);
+  });
+}
+
+if (copyWhatsappButton) {
+  copyWhatsappButton.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(whatsappDisplayNumber);
+
+      if (copyStatus) {
+        copyStatus.textContent = "Number copied. You can paste it anywhere.";
+      }
+    } catch (error) {
+      if (copyStatus) {
+        copyStatus.textContent = whatsappDisplayNumber;
+      }
+    }
+  });
+}
+
+document.addEventListener("click", (event) => {
+  if (whatsappWidget && !whatsappWidget.contains(event.target)) {
+    setWhatsappPanel(false);
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    setWhatsappPanel(false);
+  }
+});
 
 if (serviceButtons.length && serviceSelection) {
   serviceButtons.forEach((button) => {
@@ -240,3 +359,11 @@ if (feedFilters.length) {
 
 updateContactLinks();
 loadSocialFeed();
+setupRevealEffects();
+setupHeroMotion();
+updateScrollState();
+updateActiveNav();
+window.addEventListener("scroll", () => {
+  updateScrollState();
+  updateActiveNav();
+}, { passive: true });
