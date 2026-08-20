@@ -49,6 +49,7 @@ Security headers are configured in `vercel.json`.
 
 - CEO portrait: `assets/images/smillo-ceo.jpg`
 - Hero image: `assets/images/hero-event.png`
+- Talent showcase page: `talent.html`
 - Smillo WhatsApp: `+27 61 402 6217`
 - Social feed data: `assets/data/social-feed.json`
 

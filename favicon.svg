@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Clubhouse">
+  <defs>
+    <linearGradient id="ch-flame" x1="32" x2="47" y1="18" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b8202d" />
+      <stop offset="1" stop-color="#c97932" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#fffdf9" />
+  <path d="M31 14a18 18 0 1 0 0 36" fill="none" stroke="#081525" stroke-width="9" />
+  <path d="M31 14a18 18 0 0 0-17 12" fill="none" stroke="#b8202d" stroke-width="9" />
+  <path d="M31 14a18 18 0 0 1 17 12" fill="none" stroke="#c97932" stroke-width="9" />
+  <path d="M33 20l13 10v24H33z" fill="url(#ch-flame)" />
+  <path d="M44 10h7v44h-7zM55 10h7v44h-7zM44 31h18v8H44z" fill="#081525" />
+  <path d="M62 10h2v44h-2z" fill="#aeb6b8" />
+</svg>

@@ -15,7 +15,7 @@
     content="The Clubhouse, events agency, promotions agency, brand activations, corporate events, nightlife events, South Africa"
   />
   <meta name="author" content="The Clubhouse" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#071427" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:title" content="The Clubhouse | Events, Promotions & Brand Activations" />
@@ -25,7 +25,7 @@
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.theclubhouse.co.za/" />
-  <meta property="og:image" content="https://www.theclubhouse.co.za/assets/images/hero-event.png" />
+  <meta property="og:image" content="https://www.theclubhouse.co.za/assets/images/optimized/clubhouse-lifestyle-hero.webp" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Clubhouse | Events & Promotions Agency" />
@@ -33,10 +33,12 @@
     name="twitter:description"
     content="Corporate events, brand activations, launch events, and nightlife promotions planned with precision."
   />
-  <meta name="twitter:image" content="https://www.theclubhouse.co.za/assets/images/hero-event.png" />
+  <meta name="twitter:image" content="https://www.theclubhouse.co.za/assets/images/optimized/clubhouse-lifestyle-hero.webp" />
 
   <link rel="canonical" href="https://www.theclubhouse.co.za/" />
-  <link rel="preload" as="image" href="assets/images/hero-event.png" fetchpriority="high" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" as="image" href="assets/images/optimized/clubhouse-lifestyle-hero.webp" type="image/webp" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 
   <script type="application/ld+json">
@@ -45,7 +47,7 @@
     "@type": "EventService",
     "name": "The Clubhouse",
     "url": "https://www.theclubhouse.co.za/",
-    "image": "https://www.theclubhouse.co.za/assets/images/hero-event.png",
+    "image": "https://www.theclubhouse.co.za/assets/images/optimized/clubhouse-lifestyle-hero.webp",
     "description": "The Clubhouse is a premium events and promotions agency for corporate functions, nightlife experiences, brand activations, and audience engagement.",
     "email": "info@theclubhouse.co.za",
     "telephone": "+27614026217",
@@ -71,6 +73,10 @@
   <header class="site-header" data-header>
     <nav class="nav container" aria-label="Main navigation">
       <a class="brand" href="#top" aria-label="The Clubhouse home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-mark-c">&nbsp;</span>
+          <span class="brand-mark-h">&nbsp;</span>
+        </span>
         <span>
           <strong>The Clubhouse</strong>
           <small>Events & Promotions</small>
@@ -85,6 +91,7 @@
       <div class="nav-menu" id="primary-navigation" data-nav-menu>
         <a href="#about">Who We Are</a>
         <a href="#services">Services</a>
+        <a href="talent.html">Talent</a>
         <a href="#ceo">CEO</a>
         <a href="#social">Social</a>
         <a href="#contact">Contact</a>
@@ -94,27 +101,31 @@
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <img
-        class="hero-image"
-        src="assets/images/hero-event.png"
-        alt="Premium evening event with guests, lounge seating, and stage lighting"
-        width="1747"
-        height="931"
-        loading="eager"
-        fetchpriority="high"
-      />
+      <picture class="hero-picture">
+        <source srcset="assets/images/optimized/clubhouse-lifestyle-hero.webp" type="image/webp" />
+        <img
+          class="hero-image object-hero"
+          src="assets/images/IMG_8376.JPG"
+          alt="The Clubhouse promotional team at a premium lifestyle event"
+          width="4512"
+          height="3008"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="container hero-content">
-        <p class="eyebrow">Events, Promotions & Brand Activations</p>
-        <h1 id="hero-title">Corporate events with presence, precision, and pull.</h1>
+        <p class="eyebrow">Clubhouse Events & Promotions</p>
+        <h1 id="hero-title">Brand experiences with culture, color, and crowd energy.</h1>
         <p class="hero-lead">
-          The Clubhouse plans and delivers polished business functions, brand
-          activations, launch events, and nightlife promotions for clients who need
-          the details handled properly.
+          The Clubhouse creates event moments, promotional teams, and brand
+          activations that feel premium, organized, and alive from first arrival to
+          final photo.
         </p>
         <div class="hero-actions" aria-label="Primary calls to action">
           <a class="btn btn-primary" href="#contact">Start a Brief</a>
-          <a class="btn btn-secondary" href="#services">View Services</a>
+          <a class="btn btn-secondary" href="talent.html">Meet the Talent</a>
         </div>
       </div>
       <div class="hero-proof container" aria-label="The Clubhouse strengths">
@@ -133,9 +144,9 @@
         <div class="section-copy">
           <p>
             The Clubhouse is a premium events and promotions agency that pairs
-            corporate polish with promotional energy. We create experiences that
-            help brands show up clearly, confidently, and with the right people in
-            the room.
+            corporate polish with promotional energy. Our identity is bold,
+            modern, and direct: deep navy structure, red impact, orange momentum,
+            and cool gray balance.
           </p>
           <p>
             Whether a client wants to make an impact at a corporate function or
@@ -199,6 +210,48 @@
       </div>
     </section>
 
+    <section class="section visual-story" aria-labelledby="visual-story-title">
+      <div class="container">
+        <div class="section-heading narrow">
+          <p class="section-label">Lifestyle Proof</p>
+          <h2 id="visual-story-title">Promotional presence shaped for premium spaces.</h2>
+          <p>From poolside lifestyle activations to polished private suites, the work has to feel considered before it feels loud.</p>
+        </div>
+        <div class="lifestyle-grid">
+          <article class="lifestyle-card lifestyle-card-feature">
+            <picture>
+              <source srcset="assets/images/optimized/venue-suite.webp" type="image/webp" />
+              <img class="object-center" src="assets/images/IMG_6759_Nero_AI_Image_Denoiser.jpeg" alt="Premium suite promoted by The Clubhouse" width="2309" height="1732" loading="lazy" decoding="async" />
+            </picture>
+            <div class="media-caption">
+              <span>Promoted Places</span>
+              <strong>Premium suites and lounge-ready brand moments.</strong>
+            </div>
+          </article>
+          <article class="lifestyle-card">
+            <picture>
+              <source srcset="assets/images/optimized/talent-lifestyle-duo.webp" type="image/webp" />
+              <img class="object-center" src="assets/images/_TON2867.jpeg" alt="The Clubhouse talent laughing together at a lifestyle venue" width="3994" height="4993" loading="lazy" decoding="async" />
+            </picture>
+            <div class="media-caption">
+              <span>Talent Energy</span>
+              <strong>Promoters who bring warmth, style, and presence.</strong>
+            </div>
+          </article>
+          <article class="lifestyle-card">
+            <picture>
+              <source srcset="assets/images/optimized/venue-patio.webp" type="image/webp" />
+              <img class="object-center" src="assets/images/IMG_6765-fotor-20250624232039.jpg" alt="Outdoor patio venue promoted by The Clubhouse" width="4000" height="3000" loading="lazy" decoding="async" />
+            </picture>
+            <div class="media-caption">
+              <span>Venue Flow</span>
+              <strong>Spaces styled for relaxed premium movement.</strong>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section services" id="services" aria-labelledby="services-title">
       <div class="container">
         <div class="section-heading">
@@ -225,6 +278,10 @@
         <div class="service-selection" data-service-selection aria-live="polite">
           Select services to build a quick enquiry.
         </div>
+        <div class="talent-strip" aria-label="Talent showcase link">
+          <span>Promoters, hostesses, and brand ambassadors are now showcased with campaign imagery; socials can be linked as soon as you send each handle.</span>
+          <a class="btn btn-secondary" href="talent.html">Open Talent Page</a>
+        </div>
       </div>
     </section>
 
@@ -240,8 +297,8 @@
           />
         </div>
         <div class="ceo-copy">
-          <p class="section-label">Leadership</p>
-          <h2 id="ceo-title">Smillo, CEO of The Clubhouse</h2>
+          <p class="section-label">Founder</p>
+          <h2 id="ceo-title">Smillo, Founder of The Clubhouse</h2>
           <p>
             Smillo leads The Clubhouse with a sharp understanding of people,
             atmosphere, and brand presence. His role is to make sure every event
@@ -255,7 +312,7 @@
           </p>
           <div class="ceo-signature">
             <strong>Smillo</strong>
-            <span>Chief Executive Officer</span>
+            <span>Founder & Chief Executive Officer</span>
           </div>
         </div>
       </div>
@@ -353,12 +410,22 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <a class="brand" href="#top" aria-label="The Clubhouse home">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="brand-mark-c">&nbsp;</span>
+          <span class="brand-mark-h">&nbsp;</span>
+        </span>
         <span>
           <strong>The Clubhouse</strong>
           <small>Events & Promotions</small>
         </span>
       </a>
-      <p>Premium brand experiences, corporate functions, and nightlife activations.</p>
+      <div class="footer-meta">
+        <p>Premium brand experiences, corporate functions, and nightlife activations.</p>
+        <p class="site-credit">
+          Website created by
+          <a href="https://www.malkastudioza.com/" target="_blank" rel="noopener noreferrer">Malcolm Mukorera from Malka Studio</a>.
+        </p>
+      </div>
     </div>
   </footer>
 

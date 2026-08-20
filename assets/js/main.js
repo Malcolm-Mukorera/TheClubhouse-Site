@@ -211,19 +211,26 @@ const updateActiveNav = () => {
   }
 
   const sections = Array.from(navLinks)
-    .map((link) => document.querySelector(link.getAttribute("href") || ""))
+    .map((link) => {
+      const href = link.getAttribute("href") || "";
+      return href.startsWith("#") ? document.querySelector(href) : null;
+    })
     .filter(Boolean);
 
   const passedSections = sections.filter((section) => section.getBoundingClientRect().top <= 130);
   const current = passedSections[passedSections.length - 1];
 
   navLinks.forEach((link) => {
-    link.classList.toggle("is-active", Boolean(current) && link.getAttribute("href") === `#${current.id}`);
+    const href = link.getAttribute("href") || "";
+
+    if (href.startsWith("#")) {
+      link.classList.toggle("is-active", Boolean(current) && href === `#${current.id}`);
+    }
   });
 };
 
 const setupRevealEffects = () => {
-  const animatedItems = document.querySelectorAll(".section, .hero-content, .hero-proof");
+  const animatedItems = document.querySelectorAll(".section, .hero-content, .hero-proof, .talent-hero-copy, .talent-hero-media");
 
   if (!animatedItems.length || !("IntersectionObserver" in window)) {
     animatedItems.forEach((item) => item.classList.add("is-visible"));
