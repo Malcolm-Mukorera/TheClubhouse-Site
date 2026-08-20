@@ -93,45 +93,103 @@
         <a href="#services">Services</a>
         <a href="talent.html">Talent</a>
         <a href="#ceo">CEO</a>
-        <a href="#social">Social</a>
+        <a href="#events">Events</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <picture class="hero-picture">
-        <source srcset="assets/images/optimized/clubhouse-lifestyle-hero.webp" type="image/webp" />
-        <img
-          class="hero-image object-hero"
-          src="assets/images/IMG_8376.JPG"
-          alt="The Clubhouse promotional team at a premium lifestyle event"
-          width="4512"
-          height="3008"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </picture>
+    <section class="hero" id="top" aria-labelledby="hero-title" data-hero-slideshow>
       <div class="hero-overlay" aria-hidden="true"></div>
-      <div class="container hero-content">
-        <p class="eyebrow">Clubhouse Events & Promotions</p>
-        <h1 id="hero-title">Brand experiences with culture, color, and crowd energy.</h1>
-        <p class="hero-lead">
-          The Clubhouse creates event moments, promotional teams, and brand
-          activations that feel premium, organized, and alive from first arrival to
-          final photo.
-        </p>
-        <div class="hero-actions" aria-label="Primary calls to action">
-          <a class="btn btn-primary" href="#contact">Start a Brief</a>
-          <a class="btn btn-secondary" href="talent.html">Meet the Talent</a>
+      <div class="container hero-layout">
+        <div class="hero-content">
+          <article class="hero-copy is-active" data-hero-copy>
+            <p class="eyebrow">Clubhouse Events & Promotions</p>
+            <h1 id="hero-title">Events with culture, color, and crowd energy.</h1>
+            <p class="hero-lead">
+              The Clubhouse creates dynamic event moments for corporate functions,
+              nightlife launches, and brand activations that need premium execution.
+            </p>
+            <div class="hero-actions" aria-label="Primary calls to action">
+              <a class="btn btn-primary" href="mailto:info@theclubhouse.co.za?subject=The%20Clubhouse%20Event%20Enquiry">Email Us</a>
+              <a class="btn btn-secondary" href="#events">View Events</a>
+            </div>
+          </article>
+          <article class="hero-copy" data-hero-copy>
+            <p class="eyebrow">Models & Promoters</p>
+            <h2>Promoters who bring the brand into the room.</h2>
+            <p class="hero-lead">
+              Book hostesses, lifestyle models, brand ambassadors, and promotional
+              teams for launches, hospitality, guest engagement, and content moments.
+            </p>
+            <div class="hero-actions" aria-label="Talent calls to action">
+              <a class="btn btn-primary" href="mailto:info@theclubhouse.co.za?subject=The%20Clubhouse%20Talent%20Booking">Email for Talent</a>
+              <a class="btn btn-secondary" href="talent.html">Meet the Talent</a>
+            </div>
+          </article>
+          <article class="hero-copy" data-hero-copy>
+            <p class="eyebrow">Venue Promotions</p>
+            <h2>Promoted places with pictures, direction, and presence.</h2>
+            <p class="hero-lead">
+              Showcase venues with gallery-ready images, promotion angles, guest
+              movement, and Google Maps directions so people know where to go.
+            </p>
+            <div class="hero-actions" aria-label="Venue calls to action">
+              <a class="btn btn-primary" href="mailto:info@theclubhouse.co.za?subject=The%20Clubhouse%20Venue%20Promotion">Email a Venue</a>
+              <a class="btn btn-secondary" href="#events">See Places</a>
+            </div>
+          </article>
+          <div class="hero-controls" aria-label="Hero slideshow controls">
+            <button class="is-active" type="button" aria-label="Show events slide" aria-pressed="true" data-hero-control="0"></button>
+            <button type="button" aria-label="Show promoters slide" aria-pressed="false" data-hero-control="1"></button>
+            <button type="button" aria-label="Show venue promotions slide" aria-pressed="false" data-hero-control="2"></button>
+          </div>
         </div>
       </div>
+      <div class="hero-slides" aria-label="The Clubhouse slideshow images">
+        <picture class="hero-picture is-active" data-hero-slide>
+          <source srcset="assets/images/optimized/clubhouse-lifestyle-hero.webp" type="image/webp" />
+          <img
+            class="hero-image object-hero"
+            src="assets/images/IMG_8376.JPG"
+            alt="The Clubhouse promotional team at a lifestyle event"
+            width="4512"
+            height="3008"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+        <picture class="hero-picture" data-hero-slide>
+          <source srcset="assets/images/optimized/talent-night-duo.webp" type="image/webp" />
+          <img
+            class="hero-image object-right"
+            src="assets/images/IMG_8342.JPG"
+            alt="The Clubhouse talent at a night poolside activation"
+            width="4512"
+            height="3008"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+        <picture class="hero-picture" data-hero-slide>
+          <source srcset="assets/images/optimized/venue-suite.webp" type="image/webp" />
+          <img
+            class="hero-image object-center"
+            src="assets/images/IMG_6759_Nero_AI_Image_Denoiser.jpeg"
+            alt="Premium suite promoted by The Clubhouse"
+            width="2309"
+            height="1732"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </div>
       <div class="hero-proof container" aria-label="The Clubhouse strengths">
-        <span>Corporate Functions</span>
-        <span>Brand Activations</span>
-        <span>Promotional Teams</span>
+        <span>Events</span>
+        <span>Models & Promoters</span>
+        <span>Venue Promotions</span>
       </div>
     </section>
 
@@ -279,8 +337,46 @@
           Select services to build a quick enquiry.
         </div>
         <div class="talent-strip" aria-label="Talent showcase link">
-          <span>Promoters, hostesses, and brand ambassadors are now showcased with campaign imagery; socials can be linked as soon as you send each handle.</span>
+          <span>Promoters, hostesses, and brand ambassadors are showcased with campaign imagery and direct booking through The Clubhouse.</span>
           <a class="btn btn-secondary" href="talent.html">Open Talent Page</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section events-showcase" id="events" aria-labelledby="events-title">
+      <div class="container">
+        <div class="section-heading narrow">
+          <p class="section-label">Events & Places</p>
+          <h2 id="events-title">Promotions for venues, launches, and lifestyle locations.</h2>
+          <p>Each place can show multiple images, a campaign angle, and a direct Google Maps directions link for guests.</p>
+        </div>
+        <div class="venue-grid" aria-label="Promoted venues and event locations">
+          <article class="venue-card">
+            <div class="venue-gallery">
+              <img src="assets/images/optimized/venue-suite.webp" alt="Premium suite lounge promoted by The Clubhouse" width="2309" height="1732" loading="lazy" decoding="async" />
+              <img src="assets/images/optimized/venue-lounge.webp" alt="Interior lounge detail at a promoted location" width="2309" height="1732" loading="lazy" decoding="async" />
+              <img src="assets/images/IMG_6763_Nero_AI_Image_Denoiser.jpeg" alt="Lifestyle venue detail used for promotions" width="2309" height="1732" loading="lazy" decoding="async" />
+            </div>
+            <div class="venue-body">
+              <span>Promoted Location</span>
+              <h3>Premium Suite Experience</h3>
+              <p>Private-suite visuals for stays, brand shoots, hosted experiences, and lifestyle promotions.</p>
+              <a class="venue-map-link" href="https://www.google.com/maps/search/?api=1&query=Premium%20Suite%20Experience%20South%20Africa" target="_blank" rel="noopener noreferrer">Get Directions</a>
+            </div>
+          </article>
+          <article class="venue-card">
+            <div class="venue-gallery">
+              <img src="assets/images/optimized/venue-patio.webp" alt="Outdoor patio venue promoted by The Clubhouse" width="4000" height="3000" loading="lazy" decoding="async" />
+              <img src="assets/images/IMG_6728-fotor-20250624232427.jpg" alt="Outdoor venue angle for a promotion" width="4000" height="3000" loading="lazy" decoding="async" />
+              <img src="assets/images/IMG_6765-fotor-20250624232039.jpg" alt="Patio seating and venue setting for event promotions" width="4000" height="3000" loading="lazy" decoding="async" />
+            </div>
+            <div class="venue-body">
+              <span>Outdoor Promotion</span>
+              <h3>Patio & Lifestyle Venue</h3>
+              <p>Open-air space positioning for guest flow, content moments, and relaxed premium events.</p>
+              <a class="venue-map-link" href="https://www.google.com/maps/search/?api=1&query=Patio%20Lifestyle%20Venue%20South%20Africa" target="_blank" rel="noopener noreferrer">Get Directions</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -318,29 +414,36 @@
       </div>
     </section>
 
-    <section class="section social-feed" id="social" aria-labelledby="social-title">
+    <section class="section booking-routes" aria-labelledby="booking-routes-title">
       <div class="container">
         <div class="section-heading narrow">
-          <p class="section-label">Live From Smillo</p>
-          <h2 id="social-title">Follow the event energy as it happens.</h2>
+          <p class="section-label">Booking Routes</p>
+          <h2 id="booking-routes-title">Reach the team directly for events, talent, and venue promotions.</h2>
           <p>
-            Smillo’s Instagram and TikTok posts will appear here automatically once
-            the official feeds are connected. WhatsApp opens a direct booking chat.
+            Send the event date, location, audience, and talent needs. The
+            Clubhouse will recommend the right promoters, models, or venue
+            promotion package.
           </p>
         </div>
-        <div class="feed-toolbar" aria-label="Social feed filters">
-          <button class="is-active" type="button" aria-pressed="true" data-feed-filter="all">All</button>
-          <button type="button" aria-pressed="false" data-feed-filter="instagram">Instagram</button>
-          <button type="button" aria-pressed="false" data-feed-filter="tiktok">TikTok</button>
-        </div>
-        <div class="feed-status" data-feed-status aria-live="polite">
-          Preparing Smillo’s feed view.
-        </div>
-        <div class="feed-grid" data-social-feed aria-label="Smillo social feed"></div>
-        <div class="social-note">
-          <strong>WhatsApp Status</strong>
-          <span>WhatsApp Status cannot be embedded publicly through the official WhatsApp platform. Use the green WhatsApp button for direct updates and bookings.</span>
-          <a href="https://wa.me/27614026217?text=Hi%20Smillo%2C%20I%20would%20like%20to%20connect%20with%20The%20Clubhouse." target="_blank" rel="noopener noreferrer">Message Smillo</a>
+        <div class="booking-route-grid" aria-label="Ways to enquire">
+          <article class="booking-route-card">
+            <span>01</span>
+            <h3>Event Briefs</h3>
+            <p>Corporate functions, nightlife events, launches, and branded experiences.</p>
+            <a href="mailto:info@theclubhouse.co.za?subject=The%20Clubhouse%20Event%20Brief">Email an event brief</a>
+          </article>
+          <article class="booking-route-card">
+            <span>02</span>
+            <h3>Talent Bookings</h3>
+            <p>Promoters, hostesses, lifestyle models, content faces, and brand ambassadors.</p>
+            <a href="mailto:info@theclubhouse.co.za?subject=The%20Clubhouse%20Talent%20Booking">Email for talent</a>
+          </article>
+          <article class="booking-route-card">
+            <span>03</span>
+            <h3>Venue Promotions</h3>
+            <p>Location galleries, guest campaigns, directions, and promotion-ready content.</p>
+            <a href="mailto:info@theclubhouse.co.za?subject=The%20Clubhouse%20Venue%20Promotion">Email a venue enquiry</a>
+          </article>
         </div>
       </div>
     </section>

@@ -3,6 +3,9 @@ const menu = document.querySelector("[data-nav-menu]");
 const header = document.querySelector("[data-header]");
 const navLinks = document.querySelectorAll(".nav-menu a");
 const hero = document.querySelector(".hero");
+const heroSlides = document.querySelectorAll("[data-hero-slide]");
+const heroCopies = document.querySelectorAll("[data-hero-copy]");
+const heroControls = document.querySelectorAll("[data-hero-control]");
 const serviceButtons = document.querySelectorAll("[data-service]");
 const serviceSelection = document.querySelector("[data-service-selection]");
 const briefButtons = document.querySelectorAll("[data-brief]");
@@ -18,10 +21,13 @@ const copyStatus = document.querySelector("[data-copy-status]");
 const feedGrid = document.querySelector("[data-social-feed]");
 const feedStatus = document.querySelector("[data-feed-status]");
 const feedFilters = document.querySelectorAll("[data-feed-filter]");
+const talentProfileToggles = document.querySelectorAll(".talent-profile-toggle");
 const whatsappNumber = "27614026217";
 const whatsappDisplayNumber = "+27 61 402 6217";
 let feedItems = [];
 let activeFeedFilter = "all";
+let activeHeroSlide = 0;
+let heroTimer;
 
 const selectedServices = new Set();
 let selectedBrief = "Corporate event";
@@ -271,6 +277,61 @@ const setupHeroMotion = () => {
   });
 };
 
+const setHeroSlide = (index) => {
+  if (!heroSlides.length) {
+    return;
+  }
+
+  activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
+
+  heroSlides.forEach((slide, slideIndex) => {
+    slide.classList.toggle("is-active", slideIndex === activeHeroSlide);
+  });
+
+  heroCopies.forEach((copy, copyIndex) => {
+    copy.classList.toggle("is-active", copyIndex === activeHeroSlide);
+  });
+
+  heroControls.forEach((control, controlIndex) => {
+    const isActive = controlIndex === activeHeroSlide;
+    control.classList.toggle("is-active", isActive);
+    control.setAttribute("aria-pressed", String(isActive));
+  });
+};
+
+const startHeroSlideshow = () => {
+  if (heroSlides.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  window.clearInterval(heroTimer);
+  heroTimer = window.setInterval(() => {
+    setHeroSlide(activeHeroSlide + 1);
+  }, 5200);
+};
+
+const setupHeroSlideshow = () => {
+  if (!heroSlides.length) {
+    return;
+  }
+
+  setHeroSlide(0);
+  startHeroSlideshow();
+
+  heroControls.forEach((control) => {
+    control.addEventListener("click", () => {
+      const index = Number(control.getAttribute("data-hero-control"));
+
+      if (Number.isNaN(index)) {
+        return;
+      }
+
+      setHeroSlide(index);
+      startHeroSlideshow();
+    });
+  });
+};
+
 if (toggle && menu) {
   toggle.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
@@ -387,9 +448,28 @@ if (feedFilters.length) {
   });
 }
 
+if (talentProfileToggles.length) {
+  talentProfileToggles.forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".talent-profile-card");
+      const details = card?.querySelector(".talent-profile-details");
+
+      if (!details) {
+        return;
+      }
+
+      const isOpen = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!isOpen));
+      details.hidden = isOpen;
+      card.classList.toggle("is-open", !isOpen);
+    });
+  });
+}
+
 updateContactLinks();
 loadSocialFeed();
 setupRevealEffects();
+setupHeroSlideshow();
 setupHeroMotion();
 updateScrollState();
 updateActiveNav();
