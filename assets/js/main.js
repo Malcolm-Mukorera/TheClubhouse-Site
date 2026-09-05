@@ -10,9 +10,8 @@ const serviceButtons = document.querySelectorAll("[data-service]");
 const serviceSelection = document.querySelector("[data-service-selection]");
 const briefButtons = document.querySelectorAll("[data-brief]");
 const briefPreview = document.querySelector("[data-brief-preview]");
-const briefEmail = document.querySelector("[data-brief-email]");
-const contactEmail = document.querySelector("[data-email-link]");
 const whatsappLink = document.querySelector("[data-whatsapp-link]");
+const briefWhatsapps = document.querySelectorAll("[data-brief-whatsapp]");
 const whatsappWidget = document.querySelector("[data-whatsapp-widget]");
 const whatsappToggle = document.querySelector("[data-whatsapp-toggle]");
 const whatsappPanel = document.querySelector("[data-whatsapp-panel]");
@@ -22,45 +21,53 @@ const feedGrid = document.querySelector("[data-social-feed]");
 const feedStatus = document.querySelector("[data-feed-status]");
 const feedFilters = document.querySelectorAll("[data-feed-filter]");
 const talentProfileToggles = document.querySelectorAll(".talent-profile-toggle");
+const talentGallery = document.querySelector("[data-talent-gallery]");
+const talentGalleryFilters = document.querySelectorAll("[data-talent-gallery-filter]");
+const talentGalleryItems = document.querySelectorAll("[data-talent-gallery-item]");
+const talentGalleryImage = document.querySelector("[data-talent-gallery-image]");
+const talentGalleryKicker = document.querySelector("[data-talent-gallery-kicker]");
+const talentGalleryTitle = document.querySelector("[data-talent-gallery-title]");
+const talentGalleryCount = document.querySelector("[data-talent-gallery-count]");
+const talentGalleryPrev = document.querySelector("[data-talent-gallery-prev]");
+const talentGalleryNext = document.querySelector("[data-talent-gallery-next]");
 const whatsappNumber = "27614026217";
 const whatsappDisplayNumber = "+27 61 402 6217";
 let feedItems = [];
 let activeFeedFilter = "all";
 let activeHeroSlide = 0;
 let heroTimer;
+let activeTalentCategory = "all";
+let activeTalentSlide = 0;
 
 const selectedServices = new Set();
-let selectedBrief = "Corporate event";
+let selectedBrief = "Event booking";
 
 const buildMessage = () => {
   const services = Array.from(selectedServices);
   const serviceText = services.length
-    ? ` I am interested in: ${services.join(", ")}.`
-    : "";
+    ? services.join(", ")
+    : selectedBrief;
 
-  return `Hi The Clubhouse, I would like to discuss a ${selectedBrief.toLowerCase()}.${serviceText}`;
+  return `Hi Smillo, I want to book: ${serviceText}. Date/location:`;
 };
 
 const updateContactLinks = () => {
   const message = buildMessage();
-  const subject = encodeURIComponent("The Clubhouse Event Enquiry");
   const body = encodeURIComponent(message);
 
   if (briefPreview) {
     briefPreview.textContent = message;
   }
 
-  if (briefEmail instanceof HTMLAnchorElement) {
-    briefEmail.href = `mailto:info@theclubhouse.co.za?subject=${subject}&body=${body}`;
-  }
-
-  if (contactEmail instanceof HTMLAnchorElement) {
-    contactEmail.href = `mailto:info@theclubhouse.co.za?subject=${subject}&body=${body}`;
-  }
-
   if (whatsappLink instanceof HTMLAnchorElement) {
     whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${body}`;
   }
+
+  briefWhatsapps.forEach((link) => {
+    if (link instanceof HTMLAnchorElement) {
+      link.href = `https://wa.me/${whatsappNumber}?text=${body}`;
+    }
+  });
 };
 
 const fallbackFeedItems = [
@@ -332,6 +339,110 @@ const setupHeroSlideshow = () => {
   });
 };
 
+const getVisibleTalentItems = () => Array.from(talentGalleryItems).filter((item) => {
+  const categories = item.getAttribute("data-category") || "";
+  return activeTalentCategory === "all" || categories.split(" ").includes(activeTalentCategory);
+});
+
+const setTalentSlide = (index) => {
+  if (!talentGallery || !talentGalleryImage) {
+    return;
+  }
+
+  const visibleItems = getVisibleTalentItems();
+
+  if (!visibleItems.length) {
+    return;
+  }
+
+  activeTalentSlide = (index + visibleItems.length) % visibleItems.length;
+  const activeItem = visibleItems[activeTalentSlide];
+  const image = activeItem.querySelector("img");
+  const src = activeItem.getAttribute("data-src");
+  const alt = activeItem.getAttribute("data-alt") || "";
+  const title = activeItem.getAttribute("data-title") || "Clubhouse Talent";
+  const kicker = activeItem.getAttribute("data-kicker") || "Talent";
+
+  if (src) {
+    talentGalleryImage.src = src;
+  }
+
+  talentGalleryImage.alt = alt;
+  talentGalleryImage.className = image?.className || "object-center";
+
+  if (talentGalleryTitle) {
+    talentGalleryTitle.textContent = title;
+  }
+
+  if (talentGalleryKicker) {
+    talentGalleryKicker.textContent = kicker;
+  }
+
+  if (talentGalleryCount) {
+    talentGalleryCount.textContent = `${activeTalentSlide + 1} / ${visibleItems.length}`;
+  }
+
+  talentGalleryItems.forEach((item) => {
+    item.classList.toggle("is-active", item === activeItem);
+  });
+};
+
+const setTalentCategory = (category) => {
+  activeTalentCategory = category;
+  activeTalentSlide = 0;
+
+  talentGalleryFilters.forEach((button) => {
+    const isActive = button.getAttribute("data-talent-gallery-filter") === category;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+
+  talentGalleryItems.forEach((item) => {
+    const categories = item.getAttribute("data-category") || "";
+    const isVisible = category === "all" || categories.split(" ").includes(category);
+    item.hidden = !isVisible;
+  });
+
+  setTalentSlide(0);
+};
+
+const setupTalentGallery = () => {
+  if (!talentGallery || !talentGalleryItems.length) {
+    return;
+  }
+
+  talentGalleryFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      setTalentCategory(button.getAttribute("data-talent-gallery-filter") || "all");
+    });
+  });
+
+  talentGalleryItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const visibleItems = getVisibleTalentItems();
+      const index = visibleItems.indexOf(item);
+
+      if (index >= 0) {
+        setTalentSlide(index);
+      }
+    });
+  });
+
+  if (talentGalleryPrev) {
+    talentGalleryPrev.addEventListener("click", () => {
+      setTalentSlide(activeTalentSlide - 1);
+    });
+  }
+
+  if (talentGalleryNext) {
+    talentGalleryNext.addEventListener("click", () => {
+      setTalentSlide(activeTalentSlide + 1);
+    });
+  }
+
+  setTalentCategory(activeTalentCategory);
+};
+
 if (toggle && menu) {
   toggle.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
@@ -405,8 +516,8 @@ if (serviceButtons.length && serviceSelection) {
 
       const services = Array.from(selectedServices);
       serviceSelection.textContent = services.length
-        ? `Selected: ${services.join(", ")}`
-        : "Select services to build a quick enquiry.";
+        ? `Ready: ${services.join(", ")}`
+        : "Tap a service. Message Smillo.";
       updateContactLinks();
     });
   });
@@ -470,6 +581,7 @@ updateContactLinks();
 loadSocialFeed();
 setupRevealEffects();
 setupHeroSlideshow();
+setupTalentGallery();
 setupHeroMotion();
 updateScrollState();
 updateActiveNav();
